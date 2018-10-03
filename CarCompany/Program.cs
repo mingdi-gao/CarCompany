@@ -12,6 +12,7 @@ namespace CarCompany
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("welcome to CarComparisionApp --- StephenGao");
             Console.WriteLine("Loading Data......");
             CarDal carManager = new CarDal();
             carManager.loadData();
@@ -76,7 +77,7 @@ namespace CarCompany
             Console.WriteLine();
 
             Console.WriteLine("1 - Calculate the newest vehicles in order");
-            Console.WriteLine("2 - Calculate an alphabetized List of vehicles");
+            Console.WriteLine("2 - Calculate an alphabetized List of vehicles(By Model)");
             Console.WriteLine("3 - Calculate an ordered List of Vehicles by Price");
             Console.WriteLine("4 - Calculate the best value");
             Console.WriteLine("5 - Calculate fuel consumption for a given distance");
@@ -90,40 +91,34 @@ namespace CarCompany
         public static void displayResults(List<Car> resultCollection)
         {
             Console.WriteLine();
-            Console.WriteLine("Make   Model   Color    Year    Price   TCCRating   HwyMPG");
+            
+            Console.WriteLine(String.Format("{0, -10} {1, -10} {2, -10}  {3, -10}  {4, -10}  {5, -10}  {6, -10}", "Make", "Model", "Color", "Year", "Price", "TCCRating", "HwyMPG"));
             foreach (var c in resultCollection)
             {
-                Console.WriteLine(c.Make + "   " + 
-                    c.Model + "   " + 
-                    c.Color + "   " + 
-                    c.Year + "   " + 
-                    c.Price + "    " + 
-                    c.TCCRating + "    " + 
-                    c.HwyMPG);
+                var output = String.Format("{0, -10} {1, -10} {2, -10}  {3, -10}  {4, -10}  {5, -10}  {6, -10}", c.Make, c.Model, c.Color, c.Year, c.Price, c.TCCRating, c.HwyMPG);
+                Console.WriteLine(output);
             }
         }
 
         public static void displaySingleResult(Car c)
         {
             Console.WriteLine();
-            Console.WriteLine("Make   Model   Color    Year    Price   TCCRating   HwyMPG");
-            Console.WriteLine(c.Make + "   " +
-                    c.Model + "   " +
-                    c.Color + "   " +
-                    c.Year + "   " +
-                    c.Price + "    " +
-                    c.TCCRating + "    " +
-                    c.HwyMPG);
+            Console.WriteLine(String.Format("{0, -10} {1, -10} {2, -10}  {3, -10}  {4, -10}  {5, -10}  {6, -10}", "Make", "Model", "Color", "Year", "Price", "TCCRating", "HwyMPG"));
+
+            var output = String.Format("{0, -10} {1, -10} {2, -10}  {3, -10}  {4, -10}  {5, -10}  {6, -10}", c.Make, c.Model, c.Color, c.Year, c.Price, c.TCCRating, c.HwyMPG);
+            Console.WriteLine(output);
+;
 
         }
 
         public static void displayFuelConsumption(Dictionary<string, decimal> carDic)
         {
             Console.WriteLine();
-            Console.WriteLine("Model  FuelConsumption");
-            foreach(var c in carDic)
+            Console.WriteLine(String.Format("{0, -10} {1, -10}", "Model", "FuelConsump"));
+            foreach (var c in carDic)
             {
-                Console.WriteLine(c.Key + "  " + c.Value);
+                var output = String.Format("{0, -10} {1:###.##}", c.Key, c.Value);
+                Console.WriteLine(output);
             }
 
         }
@@ -131,8 +126,8 @@ namespace CarCompany
         public static void displayAvgMPG(decimal avgMPG, int year)
         {
             Console.WriteLine();
-            Console.WriteLine("Year    avgMPG");
-            Console.WriteLine(year + " " + avgMPG);
+            Console.WriteLine(string.Format("{0, -10} {1, -10}", "Year", "AvgMPG"));
+            Console.WriteLine(string.Format("{0, -10} {1:###.##}", year, avgMPG));
         }
     }
 }

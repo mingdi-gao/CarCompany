@@ -14,41 +14,41 @@ namespace CarDAL
 
         public void loadData()
         {
-            var rawdata = System.IO.File.ReadAllText("SampleData.json");
+            var rawdata = System.IO.File.ReadAllText(@"..\..\SampleData.json");
             carList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Car>>(rawdata);
         }
 
         public List<Car> getNewestVehiclesInOrder()
         {
-            return carList.OrderByDescending(l => l.Year).ToList();
+            return carList.OrderByDescending(c => c.Year).ToList();
         }
         public List<Car> getalphabetizedr()
         {
-            return carList.OrderBy(l => l.Model).ToList();
+            return carList.OrderBy(c => c.Model).ToList();
         }
         public List<Car> getOrderByPrice()
         {
-            return carList.OrderBy(l => l.Price).ToList();
+            return carList.OrderBy(c => c.Price).ToList();
         }
         public Car getBestValue()
         {
-            return carList.OrderByDescending(l => l.TCCRating).FirstOrDefault();
+            return carList.OrderByDescending(c => c.TCCRating).FirstOrDefault();
         }
         public Dictionary<string, decimal> getFuleConsumption(decimal distance)
         {
             Dictionary<string, decimal> dict = new Dictionary<string, decimal>();
-            carList.ForEach(l => dict.Add(l.Model, distance / l.HwyMPG));
+            carList.ForEach(c => dict.Add(c.Model, distance / c.HwyMPG));
             return dict;
         }
         public Car getRandomCar()
         {
-            Random rd = new Random();
-            int index = rd.Next(0, 5);
+            Random random = new Random();
+            int index = random.Next(0, 5);
             return carList[index];
         }
         public decimal averageMPGByYear(int year)
         {
-            return carList.Where(l => l.Year == year).Average(l => l.HwyMPG);
+            return carList.Where(c => c.Year == year).Average(c => c.HwyMPG);
         }
     }
 }
